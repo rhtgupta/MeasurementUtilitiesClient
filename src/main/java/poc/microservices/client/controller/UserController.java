@@ -49,7 +49,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/convert", produces = "application/json")
-	public @ResponseBody double calculate(
+	public @ResponseBody Double calculate(
 			@ModelAttribute("convertFromTextField") Double convertFromTextField,
 			@ModelAttribute("convertFrom") String convertFrom,
 			@ModelAttribute("convertTo") String convertTo) {
@@ -61,7 +61,7 @@ public class UserController {
 		parametersMap.put("convertTo", convertTo);
 
 		return restTemplate.getForObject(
-				"http://MEASUREMENT-UTILITIES-SERVICE/getUserConversionResult",
+				"http://MEASUREMENT-UTILITIES-SERVICE/getUserConversionResult/{convertFromTextField}/{convertFrom}/{convertTo}",
 				Double.class, parametersMap);
 
 	}
