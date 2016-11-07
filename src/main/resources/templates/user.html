@@ -1,0 +1,124 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Blank Document</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/css/jquery-ui.min.css"></link>
+<link rel="stylesheet"
+	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css"></link>
+<!-- Optional theme -->
+<!--     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> -->
+<!-- Current doc CSS -->
+<link rel="stylesheet" href="index.css"></link>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#convertBtn").click(function() {
+			$.ajax({
+				url : "convert",
+				data : {
+					convertFromTextField : document.getElementById("convertFromTextField").value,
+					convertFrom : document.getElementById("convertFrom").value,
+					convertTo : document.getElementById("convertTo").value
+				},
+				success : function(result) {
+					 $("#result").val(result); 
+				}
+			});
+		});
+	});
+
+</script>
+</head>
+<body>
+	<!-- <form action="calculate"> -->
+	<!-- 	<form:form method="POST" commandName="user"> -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-11">
+				<br></br> <br> </br>
+				<h2>User Portal :</h2>
+				<br></br> <br> </br> <br> </br>
+			</div>
+			<div class="col-xs-1">
+				<br></br> <br> </br>
+				<p>
+					<a href="/index">back</a>
+				</p>
+				<br></br> <br> </br> <br> </br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-1">
+				<h4>
+					<b>Convert:</b>
+				</h4>
+			</div>
+			<div class="col-xs-2">
+				<div class="form-group">
+					<input type="text" class="form-control" id="convertFromTextField" />
+				</div>
+			</div>
+			<div class="col-xs-2">
+				<select class="btn btn-primary dropdown-toggle"
+					data-toggle="dropdown" id="convertFrom">
+					<option>---Select---</option>
+					<option>inch</option>
+					<option>feet</option>
+					<option>meter</option>
+				</select>
+			</div>
+			<div class="col-xs-2">
+				<h4>
+					<b>to</b>
+				</h4>
+			</div>
+			<div class="col-xs-2">
+				<div class="dropdown">
+					<select class="btn btn-primary dropdown-toggle"
+						data-toggle="dropdown" id="convertTo">
+						<option>---Select---</option>
+						<option>inch</option>
+						<option>feet</option>
+						<option>meter</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-1">
+				<h4>
+					<b>Result:</b>
+				</h4>
+			</div>
+			<div class="col-xs-1">
+				<div class="form-group">
+					<input type="text" class="form-control" id="result"
+						disabled="disabled" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<br></br> <br> </br>
+			<div class="col-xs-10"></div>
+			<div class="col-xs-1">
+				<button type="button" class="btn btn-primary" id="convertBtn">Convert</button>
+			</div>
+			<div class="col-xs-1"></div>
+		</div>
+		<!-- Latest compiled and minified JavaScript -->
+		<script
+			src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script
+			src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script
+			src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<!-- Current doc JS -->
+		<script src="index.js"></script>
+	</div>
+	<!-- </form:form> -->
+	<!-- </form> -->
+</body>
+</html>
