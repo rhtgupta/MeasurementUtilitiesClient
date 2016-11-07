@@ -1,11 +1,7 @@
 package main.java.poc.microservices.client.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import main.java.poc.microservices.client.dto.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -32,23 +28,12 @@ public class UserController {
 		return "index";
 	}
 
-	@RequestMapping("/userPortal")
-	public String getUserPortal(Map<String, Object> model) {
-		List<String> measurmentUnitList = new ArrayList<String>();
-		measurmentUnitList.add("inch");
-		measurmentUnitList.add("feet");
-		measurmentUnitList.add("meter");
-		model.put("measurmentUnitList", measurmentUnitList);
-		model.put("user", new User());
-		return "user";
+	@RequestMapping("/measurementConversionPage")
+	public String getMeasurementConversionPortal(Map<String, Object> model) {
+		return "measurementConversion";
 	}
 
-	@RequestMapping("/adminPortal")
-	public String getAdminPortal() {
-		return "admin";
-	}
-
-	@RequestMapping(value = "/convert", produces = "application/json")
+	@RequestMapping(value = "/measurementConversion", produces = "application/json")
 	public @ResponseBody Double calculate(
 			@ModelAttribute("convertFromTextField") Double convertFromTextField,
 			@ModelAttribute("convertFrom") String convertFrom,
@@ -61,7 +46,7 @@ public class UserController {
 		parametersMap.put("convertTo", convertTo);
 
 		return restTemplate.getForObject(
-				"http://MEASUREMENT-UTILITIES-SERVICE/getUserConversionResult/{convertFromTextField}/{convertFrom}/{convertTo}",
+				"http://MEASUREMENT-UTILITIES-SERVICE/getMeasurementConversionResult/{convertFromTextField}/{convertFrom}/{convertTo}",
 				Double.class, parametersMap);
 
 	}
