@@ -16,31 +16,22 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$("#convertBtn")
-								.click(
-										function() {
-											$
-													.ajax({
-														url : "measurementConversion",
-														data : {
-															convertFromTextField : document
-																	.getElementById("convertFromTextField").value,
-															convertFrom : document
-																	.getElementById("convertFrom").value,
-															convertTo : document
-																	.getElementById("convertTo").value
-														},
-														success : function(
-																result) {
-															$("#result").val(
-																	result);
-														}
-													});
-										});
-					});
+	$(document).ready(function() {
+		$("#convertBtn").click(function() {
+			$.ajax({
+				url : "temperatureConversion",
+				data : {
+					convertFromTextField : document.getElementById("convertFromTextField").value,
+					convertFrom : document.getElementById("convertFrom").value,
+					convertTo : document.getElementById("convertTo").value
+				},
+				success : function(result) {
+					 $("#result").val(result); 
+				}
+			});
+		});
+	});
+
 </script>
 </head>
 <body>
@@ -50,7 +41,7 @@
 		<div class="row">
 			<div class="col-xs-11">
 				<br></br> <br> </br>
-				<h2>Measurement Conversion :</h2>
+				<h2>Temperature Conversion :</h2>
 				<br></br> <br> </br> <br> </br>
 			</div>
 			<div class="col-xs-1">
@@ -76,10 +67,9 @@
 				<select class="btn btn-primary dropdown-toggle"
 					data-toggle="dropdown" id="convertFrom">
 					<option>---Select---</option>
-					<option>Inch</option>
-					<option>Foot</option>
-					<option>Centimetre</option>
-					<option>Metre</option>
+					<option>Celsius</option>
+					<option>Fahrenheit</option>
+					<option>Kelvin</option>
 				</select>
 			</div>
 			<div class="col-xs-2">
@@ -92,10 +82,9 @@
 					<select class="btn btn-primary dropdown-toggle"
 						data-toggle="dropdown" id="convertTo">
 						<option>---Select---</option>
-						<option>Inch</option>
-						<option>Foot</option>
-						<option>Centimetre</option>
-						<option>Metre</option>
+						<option>Celsius</option>
+						<option>Fahrenheit</option>
+						<option>Kelvin</option>
 					</select>
 				</div>
 			</div>

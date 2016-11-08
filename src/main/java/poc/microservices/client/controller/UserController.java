@@ -29,12 +29,17 @@ public class UserController {
 	}
 
 	@RequestMapping("/measurementConversionPage")
-	public String getMeasurementConversionPortal(Map<String, Object> model) {
+	public String getMeasurementConversionPage(Map<String, Object> model) {
 		return "measurementConversion";
 	}
 
+	@RequestMapping("/temperatureConversionPage")
+	public String getTemperatureConversionPage(Map<String, Object> model) {
+		return "temperatureConversion";
+	}
+
 	@RequestMapping(value = "/measurementConversion", produces = "application/json")
-	public @ResponseBody Double calculate(
+	public @ResponseBody Double convertMeasurement(
 			@ModelAttribute("convertFromTextField") Double convertFromTextField,
 			@ModelAttribute("convertFrom") String convertFrom,
 			@ModelAttribute("convertTo") String convertTo) {
@@ -45,9 +50,29 @@ public class UserController {
 		parametersMap.put("convertFrom", convertFrom);
 		parametersMap.put("convertTo", convertTo);
 
-		return restTemplate.getForObject(
-				"http://MEASUREMENT-UTILITIES-SERVICE/getMeasurementConversionResult/{convertFromTextField}/{convertFrom}/{convertTo}",
-				Double.class, parametersMap);
+		return restTemplate
+				.getForObject(
+						"http://MEASUREMENT-UTILITIES-SERVICE/getMeasurementConversionResult/{convertFromTextField}/{convertFrom}/{convertTo}",
+						Double.class, parametersMap);
+
+	}
+
+	@RequestMapping(value = "/temperatureConversion", produces = "application/json")
+	public @ResponseBody Double convertTemperature(
+			@ModelAttribute("convertFromTextField") Double convertFromTextField,
+			@ModelAttribute("convertFrom") String convertFrom,
+			@ModelAttribute("convertTo") String convertTo) {
+		System.out.println("calculate method ");
+		Map<String, String> parametersMap = new HashMap<String, String>();
+		parametersMap.put("convertFromTextField",
+				convertFromTextField.toString());
+		parametersMap.put("convertFrom", convertFrom);
+		parametersMap.put("convertTo", convertTo);
+
+		return restTemplate
+				.getForObject(
+						"http://MEASUREMENT-UTILITIES-SERVICE/getTemperatureConversionResult/{convertFromTextField}/{convertFrom}/{convertTo}",
+						Double.class, parametersMap);
 
 	}
 }
