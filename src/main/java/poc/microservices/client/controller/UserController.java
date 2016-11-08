@@ -50,7 +50,6 @@ public class UserController {
 			@ModelAttribute("convertFromTextField") Double convertFromTextField,
 			@ModelAttribute("convertFrom") String convertFrom,
 			@ModelAttribute("convertTo") String convertTo) {
-		System.out.println("calculate method ");
 		Map<String, String> parametersMap = new HashMap<String, String>();
 		parametersMap.put("convertFromTextField",
 				convertFromTextField.toString());
@@ -65,7 +64,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/temperatureConversion", produces = "application/json")
-	public @ResponseBody Double convertTemperature(
+	public @ResponseBody Result convertTemperature(
 			@ModelAttribute("convertFromTextField") Double convertFromTextField,
 			@ModelAttribute("convertFrom") String convertFrom,
 			@ModelAttribute("convertTo") String convertTo) {
@@ -79,7 +78,7 @@ public class UserController {
 		return restTemplate
 				.getForObject(
 						"http://MEASUREMENT-UTILITIES-SERVICE/getTemperatureConversionResult/{convertFromTextField}/{convertFrom}/{convertTo}",
-						Double.class, parametersMap);
+						Result.class, parametersMap);
 
 	}
 }
