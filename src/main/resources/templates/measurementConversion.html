@@ -16,31 +16,23 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$("#convertBtn")
-								.click(
-										function() {
-											$
-													.ajax({
-														url : "measurementConversion",
-														data : {
-															convertFromTextField : document
-																	.getElementById("convertFromTextField").value,
-															convertFrom : document
-																	.getElementById("convertFrom").value,
-															convertTo : document
-																	.getElementById("convertTo").value
-														},
-														success : function(
-																result) {
-															$("#result").val(
-																	result);
-														}
-													});
-										});
-					});
+	$(document).ready(function() {
+		$("#convertBtn").click(function() {
+			$.ajax({
+				url : "measurementConversion",
+				data : {
+					convertFromTextField : document.getElementById("convertFromTextField").value,
+					convertFrom : document.getElementById("convertFrom").value,
+					convertTo : document.getElementById("convertTo").value
+				},
+				success : function(data) {
+					$("#servedBy").html(data.servedBy);
+					$("#availableInCache").html(data.avaiilableInCache);
+					$("#result").val(data.result);
+				}
+			});
+		});
+	});
 </script>
 </head>
 <body>
@@ -113,7 +105,15 @@
 		</div>
 		<div class="row">
 			<br></br> <br> </br>
-			<div class="col-xs-10"></div>
+			<div class="col-xs-2">
+				<b>Served By: </b>
+				<p id="servedBy">NA</p>
+			</div>
+			<div class="col-xs-2">
+				<b>Result from cache: </b>
+				<p id="availableInCache">NA</p>
+			</div>
+			<div class="col-xs-6"></div>
 			<div class="col-xs-1">
 				<button type="button" class="btn btn-primary" id="convertBtn">Convert</button>
 			</div>

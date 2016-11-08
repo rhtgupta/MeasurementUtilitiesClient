@@ -2,7 +2,7 @@ package main.java.poc.microservices.client.controller;
 
 import java.util.Map;
 
-import main.java.poc.microservices.client.dto.User;
+import main.java.poc.microservices.client.dto.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -39,8 +39,8 @@ public class ClientRestController {
 					"http://MEASUREMENT-UTILITIES-SERVICE/getUser", User.class);
 			System.out.println(user);
 		}*/
-		User user = restTemplate.getForObject(
-				"http://MEASUREMENT-UTILITIES-SERVICE/getUser", User.class);
+		Result user = restTemplate.getForObject(
+				"http://MEASUREMENT-UTILITIES-SERVICE/getUser", Result.class);
 		System.out.println(totalRequestCountMap.get("user"));
 
 	}

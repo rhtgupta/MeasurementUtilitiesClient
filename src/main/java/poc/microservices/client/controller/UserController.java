@@ -3,8 +3,15 @@ package main.java.poc.microservices.client.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import main.java.poc.microservices.client.dto.Result;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +46,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/measurementConversion", produces = "application/json")
-	public @ResponseBody Double convertMeasurement(
+	public @ResponseBody Result convertMeasurement(
 			@ModelAttribute("convertFromTextField") Double convertFromTextField,
 			@ModelAttribute("convertFrom") String convertFrom,
 			@ModelAttribute("convertTo") String convertTo) {
@@ -53,7 +60,7 @@ public class UserController {
 		return restTemplate
 				.getForObject(
 						"http://MEASUREMENT-UTILITIES-SERVICE/getMeasurementConversionResult/{convertFromTextField}/{convertFrom}/{convertTo}",
-						Double.class, parametersMap);
+						Result.class, parametersMap);
 
 	}
 
