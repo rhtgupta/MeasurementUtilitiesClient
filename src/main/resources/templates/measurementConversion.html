@@ -26,110 +26,150 @@
 					convertTo : document.getElementById("convertTo").value
 				},
 				success : function(data) {
-					$("#servedBy").html(data.servedBy);
-					$("#availableInCache").html(data.avaiilableInCache);
 					$("#result").val(data.result);
+					if($("#summaryConvertText").text() == 'NA'){
+						$("#summaryConvertText").html(data.convertFromTextField);
+						$("#summaryConvertFrom").html(data.convertFrom);
+						$("#summaryConvertTo").html(data.convertTo);
+						$("#summaryResult").html(data.result);
+						$("#summaryServedBy").html(data.servedBy);
+						$("#summaryAvailableInCache").html(data.availableInCache);
+					}else{
+						$("#summary").append("<tr><td>"+data.convertFromTextField+"</td><td>"+data.convertFrom+"</td><td>"+data.convertTo+"</td><td>"+data.result+"</td><td>"+data.servedBy+"</td><td>"+data.availableInCache+"</td></tr>");
+					}
 				}
 			});
 		});
 	});
 </script>
 </head>
+
+
 <body>
-	<!-- <form action="calculate"> -->
-	<!-- 	<form:form method="POST" commandName="user"> -->
-	<div class="container">
-		<div class="row"><div class="col-xs-10"><br></br><br></br><br></br></div></div>
-		<div class="row">
-			<div class="col-xs-10">
-				<h2><img src="measurment.png" alt="click here" width="30" height="30"
-					border="1" /> Measurement Conversion :</h2>
-			</div>
-			<div class="col-xs-1">
-				<p>
-					<a class="btn btn btn-info" href="/index">Back</a>
-				</p>
-			</div>
-		</div>
-		<div class="row"><div class="col-xs-10"><br></br><br></br><br></br></div></div>
-		
-		<div class="row">
-			<div class="col-xs-1">
-				<h4>
-					<b>Convert:</b>
-				</h4>
-			</div>
-			<div class="col-xs-2">
-				<div class="form-group">
-					<input type="text" class="form-control" id="convertFromTextField" />
-				</div>
-			</div>
-			<div class="col-xs-2">
-				<select class="btn btn-primary dropdown-toggle"
-					data-toggle="dropdown" id="convertFrom">
-					<option>---Select---</option>
-					<option>Inch</option>
-					<option>Foot</option>
-					<option>Centimetre</option>
-					<option>Metre</option>
-				</select>
-			</div>
-			<div class="col-xs-1">
-				<h4>
-					<b>to</b>
-				</h4>
-			</div>
-			<div class="col-xs-2">
-				<div class="dropdown">
-					<select class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown" id="convertTo">
-						<option>---Select---</option>
-						<option>Inch</option>
-						<option>Foot</option>
-						<option>Centimetre</option>
-						<option>Metre</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-xs-1">
-				<h4>
-					<b>Result:</b>
-				</h4>
-			</div>
-			<div class="col-xs-2">
-				<div class="form-group">
-					<input type="text" class="form-control" id="result"
-						disabled="disabled" />
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<br></br> <br> </br>
-			<div class="col-xs-2">
-				<b>Served By: </b>
-				<p id="servedBy">NA</p>
-			</div>
-			<div class="col-xs-2">
-				<b>Result from cache: </b>
-				<p id="availableInCache">NA</p>
-			</div>
-			<div class="col-xs-6"></div>
-			<div class="col-xs-1">
-				<button type="button" class="btn btn-primary" id="convertBtn">Convert</button>
-			</div>
-			<div class="col-xs-1"></div>
-		</div>
-		<!-- Latest compiled and minified JavaScript -->
-		<script
-			src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-		<script
-			src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-		<script
-			src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-		<!-- Current doc JS -->
-		<script src="index.js"></script>
-	</div>
-	<!-- </form:form> -->
-	<!-- </form> -->
+   <!-- <form action="calculate"> -->
+   <!-- 	<form:form method="POST" commandName="user"> -->
+   <div class="container">
+      <div class="row">
+         <div class="col-xs-10">
+            <br></br>
+            <br></br>
+            <br></br>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-10">
+            <h2>
+               <img src="measurment.png" alt="click here" width="30" height="30"
+                  border="1" /> Measurement Conversion:
+            </h2>
+         </div>
+         <div class="col-xs-1">
+            <p>
+               <a class="btn btn btn-info" href="/index">Back</a>
+            </p>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-10">
+            <br></br>
+            <br></br>
+            <br></br>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-1">
+            <h4>
+               <b>Convert:</b>
+            </h4>
+         </div>
+         <div class="col-xs-2">
+            <div class="form-group">
+               <input type="text" class="form-control" id="convertFromTextField" />
+            </div>
+         </div>
+         <div class="col-xs-2">
+            <select class="btn btn-primary dropdown-toggle"
+               data-toggle="dropdown" id="convertFrom">
+               <option>---Select---</option>
+               <option>Inch</option>
+               <option>Foot</option>
+               <option>Centimetre</option>
+               <option>Metre</option>
+            </select>
+         </div>
+         <div class="col-xs-1">
+            <h4>
+               <b>to</b>
+            </h4>
+         </div>
+         <div class="col-xs-2">
+            <div class="dropdown">
+               <select class="btn btn-primary dropdown-toggle"
+                  data-toggle="dropdown" id="convertTo">
+                  <option>---Select---</option>
+                  <option>Inch</option>
+                  <option>Foot</option>
+                  <option>Centimetre</option>
+                  <option>Metre</option>
+               </select>
+            </div>
+         </div>
+         <div class="col-xs-1">
+            <h4>
+               <b>Result:</b>
+            </h4>
+         </div>
+         <div class="col-xs-2">
+            <div class="form-group">
+               <input type="text" class="form-control" id="result"
+                  disabled="disabled" />
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <br></br> <br></br>
+         <div class="col-xs-10"></div>
+         <div class="col-xs-2">
+            <button type="button" class="btn btn-primary" id="convertBtn">Convert</button>
+         </div>
+      </div>
+      <br></br>
+      <h3>Summary:</h3>
+      <table id="grid-basic" class="table table-condensed table-hover table-striped">
+         <thead>
+            <tr>
+               <th>Convert:</th>
+               <th>From:</th>
+               <th>To:</th>
+               <th>Result:</th>
+               <th>Served By:</th>
+               <th>From Cache:</th>
+            </tr>
+         </thead>
+         <tbody id="summary">
+            <tr>
+               <td id="summaryConvertText">NA</td>
+               <td id="summaryConvertFrom">NA</td>
+               <td id="summaryConvertTo">NA</td>
+               <td id="summaryResult">NA</td>
+               <td id="summaryServedBy">NA</td>
+               <td id="summaryAvailableInCache">NA</td>
+            </tr>
+         </tbody>
+      </table>
+      <!-- Latest compiled and minified JavaScript -->
+      <script
+         src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      <script
+         src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+      <script
+         src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+      <!-- Current doc JS -->
+      <script src="index.js"></script>
+   </div>
+   <!-- </form:form> -->
+   <!-- </form> -->
 </body>
+
+
 </html>
