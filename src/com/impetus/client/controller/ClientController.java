@@ -3,6 +3,8 @@ package com.impetus.client.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ public class ClientController {
 	@Autowired
 	@LoadBalanced
 	protected RestTemplate restTemplate;
+	
+	private final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
 	@RequestMapping("/")
 	public String getIndex1(Map<String, Object> model) {
@@ -32,11 +36,13 @@ public class ClientController {
 
 	@RequestMapping("/measurementPage")
 	public String getMeasurementPage(Map<String, Object> model) {
+		logger.info("Returning Measurement view to render on UI");
 		return "measurementConversion";
 	}
 
 	@RequestMapping("/temperaturePage")
 	public String getTemperaturePage(Map<String, Object> model) {
+		logger.info("Returning Temprature view to render on UI");
 		return "temperatureConversion";
 	}
 
@@ -44,11 +50,13 @@ public class ClientController {
 	public @ResponseBody ConversionInfo convertMeasurement(
 			@ModelAttribute("convert") Double convert,
 			@ModelAttribute("from") String from, @ModelAttribute("to") String to) {
+		logger.info("Entering measurement controller");
 		Map<String, String> parametersMap = new HashMap<String, String>();
 		parametersMap.put("convert", convert.toString());
 		parametersMap.put("from", from);
 		parametersMap.put("to", to);
-
+		
+		logger.info("Rest call to measurement service registered on Eureka Server");		
 		return restTemplate
 				.getForObject(
 						"http://MEASUREMENT-UTILITIES-SERVICE/measurement/{convert}/{from}/{to}",
@@ -60,11 +68,13 @@ public class ClientController {
 	public @ResponseBody ConversionInfo convertTemperature(
 			@ModelAttribute("convert") Double convert,
 			@ModelAttribute("from") String from, @ModelAttribute("to") String to) {
+		logger.info("Entering temperature controller");
 		Map<String, String> parametersMap = new HashMap<String, String>();
 		parametersMap.put("convert", convert.toString());
 		parametersMap.put("from", from);
 		parametersMap.put("to", to);
-
+		
+		logger.info("Rest call to temperature service registered on Eureka Server");		
 		return restTemplate
 				.getForObject(
 						"http://MEASUREMENT-UTILITIES-SERVICE/temperature/{convert}/{from}/{to}",
