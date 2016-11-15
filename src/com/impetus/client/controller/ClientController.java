@@ -10,8 +10,9 @@ import static com.impetus.client.common.Constants.TYPE;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,9 @@ import com.impetus.client.dto.ConversionInfo;
 public class ClientController {
 
 	@Autowired
-	@LoadBalanced
 	protected RestTemplate restTemplate;
+
+	private Logger logger = LoggerFactory.getLogger(ClientController.class);
 
 	@RequestMapping("/")
 	public String getIndex1(Map<String, Object> model) {
@@ -39,11 +41,13 @@ public class ClientController {
 
 	@RequestMapping("/measurementPage")
 	public String getMeasurementPage(Map<String, Object> model) {
+		logger.info("Returning measurement view to render on UI");
 		return "measurementConversion";
 	}
 
 	@RequestMapping("/temperaturePage")
 	public String getTemperaturePage(Map<String, Object> model) {
+		logger.info("Returning temperature view to render on UI");
 		return "temperatureConversion";
 	}
 
@@ -56,7 +60,8 @@ public class ClientController {
 		parametersMap.put(FROM, from);
 		parametersMap.put(TO, to);
 		parametersMap.put(TYPE, CONVERSION_TYPE_MEASUREMENT);
-
+		
+		logger.info("Call service registered on Eureka server");
 		return restTemplate
 				.getForObject(
 						"http://MEASUREMENT-UTILITIES-SERVICE/calculate/{convert}/{from}/{to}/{type}",
@@ -74,6 +79,7 @@ public class ClientController {
 		parametersMap.put(TO, to);
 		parametersMap.put(TYPE, CONVERSION_TYPE_TEMPERATURE);
 
+		logger.info("Call service registered on Eureka server");
 		return restTemplate
 				.getForObject(
 						"http://MEASUREMENT-UTILITIES-SERVICE/calculate/{convert}/{from}/{to}/{type}",
