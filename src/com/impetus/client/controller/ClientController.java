@@ -1,5 +1,12 @@
 package com.impetus.client.controller;
 
+import static com.impetus.client.common.Constants.CONVERSION_TYPE_MEASUREMENT;
+import static com.impetus.client.common.Constants.CONVERSION_TYPE_TEMPERATURE;
+import static com.impetus.client.common.Constants.CONVERT;
+import static com.impetus.client.common.Constants.FROM;
+import static com.impetus.client.common.Constants.TO;
+import static com.impetus.client.common.Constants.TYPE;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,13 +52,14 @@ public class ClientController {
 			@ModelAttribute("convert") Double convert,
 			@ModelAttribute("from") String from, @ModelAttribute("to") String to) {
 		Map<String, String> parametersMap = new HashMap<String, String>();
-		parametersMap.put("convert", convert.toString());
-		parametersMap.put("from", from);
-		parametersMap.put("to", to);
+		parametersMap.put(CONVERT, convert.toString());
+		parametersMap.put(FROM, from);
+		parametersMap.put(TO, to);
+		parametersMap.put(TYPE, CONVERSION_TYPE_MEASUREMENT);
 
 		return restTemplate
 				.getForObject(
-						"http://MEASUREMENT-UTILITIES-SERVICE/measurement/{convert}/{from}/{to}",
+						"http://MEASUREMENT-UTILITIES-SERVICE/calculate/{convert}/{from}/{to}/{type}",
 						ConversionInfo.class, parametersMap);
 
 	}
@@ -61,13 +69,14 @@ public class ClientController {
 			@ModelAttribute("convert") Double convert,
 			@ModelAttribute("from") String from, @ModelAttribute("to") String to) {
 		Map<String, String> parametersMap = new HashMap<String, String>();
-		parametersMap.put("convert", convert.toString());
-		parametersMap.put("from", from);
-		parametersMap.put("to", to);
+		parametersMap.put(CONVERT, convert.toString());
+		parametersMap.put(FROM, from);
+		parametersMap.put(TO, to);
+		parametersMap.put(TYPE, CONVERSION_TYPE_TEMPERATURE);
 
 		return restTemplate
 				.getForObject(
-						"http://MEASUREMENT-UTILITIES-SERVICE/temperature/{convert}/{from}/{to}",
+						"http://MEASUREMENT-UTILITIES-SERVICE/calculate/{convert}/{from}/{to}/{type}",
 						ConversionInfo.class, parametersMap);
 
 	}
