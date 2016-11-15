@@ -19,23 +19,23 @@
 	$(document).ready(function() {
 		$("#convertBtn").click(function() {
 			$.ajax({
-				url : "temperatureConversion",
+				url : "temperature",
 				data : {
-					convertFromTextField : document.getElementById("convertFromTextField").value,
-					convertFrom : document.getElementById("convertFrom").value,
-					convertTo : document.getElementById("convertTo").value
+					convert : document.getElementById("convertFromTextField").value,
+					from : document.getElementById("convertFrom").value,
+					to : document.getElementById("convertTo").value
 				},
 				success : function(data) {
 					$("#result").val(data.result);
 					if($("#summaryConvertText").text() == 'NA'){
-						$("#summaryConvertText").html(data.convertFromTextField);
-						$("#summaryConvertFrom").html(data.convertFrom);
-						$("#summaryConvertTo").html(data.convertTo);
-						$("#summaryResult").html(data.result);
+						$("#summaryConvertText").html(data.convert);
+						$("#summaryConvertFrom").html(data.from);
+						$("#summaryConvertTo").html(data.to);
+						$("#summaryResult").html(data.output);
 						$("#summaryServedBy").html(data.servedBy);
 						$("#summaryAvailableInCache").html(data.availableInCache);
 					}else{
-						$("#summary").append("<tr><td>"+data.convertFromTextField+"</td><td>"+data.convertFrom+"</td><td>"+data.convertTo+"</td><td>"+data.result+"</td><td>"+data.servedBy+"</td><td>"+data.availableInCache+"</td></tr>");
+						$("#summary").append("<tr><td>"+data.convert+"</td><td>"+data.from+"</td><td>"+data.to+"</td><td>"+data.output+"</td><td>"+data.servedBy+"</td><td>"+data.availableInCache+"</td></tr>");
 					}
 				}
 			});

@@ -1,4 +1,4 @@
-package main.java.poc.microservices.client.server;
+package com.impetus.client.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,8 +10,8 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = { "main.java.poc.microservices.client.controller" })
-public class ClientServer {
+@ComponentScan(basePackages = { "com.impetus.client.controller" })
+public class ClientMain {
 
 	@LoadBalanced
 	@Bean
@@ -21,6 +21,6 @@ public class ClientServer {
 
 	public static void main(String[] args) {
 		System.setProperty("spring.config.name", "measurement-client-server");
-		SpringApplication.run(ClientServer.class, args);
+		SpringApplication.run(ClientMain.class, args);
 	}
 }
